@@ -1,3 +1,5 @@
-# Kubernetes + Let's Encrypt Automatic Cert Generation
+# kube-nginx-letsencrypt
 
-Demo for how to automatically create https certs on Kubernetes using Let's encrypt
+Obtain and install Let's Encrypt certificates for Kubernetes Ingresses
+
+https://hub.docker.com/r/sjenning/kube-nginx-letsencrypt/
