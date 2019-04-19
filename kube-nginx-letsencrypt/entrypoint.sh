@@ -45,6 +45,6 @@ curl \
   -XPATCH \
   -H "Accept: application/json, */*" \
   -H "Content-Type: application/strategic-merge-patch+json" \
-  -d @/secret-patch.json https://kubernetes/api/v1/namespaces/${NAMESPACE}/secrets/${SECRET} \
+  -d @/secret-patch.json https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/${NAMESPACE}/secrets/${SECRET} \
   -k -v
 echo "Done"
