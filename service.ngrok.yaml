@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: letsngrok
+spec:
+  selector:
+    app: letsngrok
+  # This needs to be a NodePort so that our ingress controller can access the service
+  # NOTE: Unnecessary for minikube's ingress-controller
+  type: NodePort
+  ports:
+    - protocol: "TCP"
+      nodePort: 32111
+      port: 4040

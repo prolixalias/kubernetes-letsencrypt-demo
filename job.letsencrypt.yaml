@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: letsngrok
+  labels:
+    app: letsngrok
+spec:
+  template:
+    metadata:
+      name: letsngrok
+      labels:
+        app: letsngrok
+    spec:
+      containers:
+      # Bash script that launches certbot
+      # Fork of github.com/sjenning/kube-nginx-letsencrypt
+      #- image: quay.io/hiphipjorge/kube-nginx-letsencrypt:latest
+      - image: prolixalias/letsngrok:v0.0.1
+        name: letsencrypt
+        imagePullPolicy: Always
+        ports:
+        - name: letsngrok
+          containerPort: 4040
+        env:
+        - name: NGROK_AUTHTOKEN
+          valueFrom:
+            secretKeyRef:
+              name: ngrok
+              key: token
+        - name: DOMAINS
+          value: rancher.fervid.us
+        - name: EMAIL
+          value: operations@fervid.us
+        - name: SECRET
+          value: letsencrypt-certs
+      restartPolicy: Never

@@ -1,23 +1,23 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: "kubernetes-demo-app-ingress-service"
+  name: "ngrok"
   labels:
     # Timestamp used in order to force reload of the secret
     last_updated: "1494099933"
 spec:
   tls:
   - hosts:
-    - kubernetes-letsencrypt.jorge.fail
+    - ngrok.fervid.us
     secretName: letsencrypt-certs
   rules:
-  - host: kubernetes-letsencrypt.jorge.fail
+  - host: ngrok.fervid.us
     http:
       paths:
       # The * is needed so that all traffic gets redirected to the nginx box
       - path: /*
         backend:
-          serviceName: nginx
-          servicePort: 80
+          serviceName: ngrok
+          servicePort: 4040
       # We could add a /.well-known/* route here and redirect to the job directory
       # but our job does not have a health route

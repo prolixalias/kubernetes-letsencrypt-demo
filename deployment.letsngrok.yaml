@@ -1,0 +1,29 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: letsngrok
+  name: letsngrok
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: letsngrok
+    spec:
+      containers:
+        - name: ngrok
+          image: prolixalias/letsngrok:v0.0.1
+          volumeMounts:
+            - name: letsencrypt-config
+              mountPath: /etc/letsencrypt
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4040
+      # Load the configuration files for letsencrypt
+      volumes:
+        - name: letsencrypt-config
+          configMap:
+            name: letsencrypt-config
